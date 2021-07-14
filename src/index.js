@@ -15,7 +15,7 @@ const lst = [
 
 const selectList = document.getElementById('listed');
 
-function viewList(){
+function viewList() {
   for (let i = 1; i <= lst.length; i += 1) {
     for (let j = 0; j < lst.length; j += 1) {
       if (lst[j].index === i) {
