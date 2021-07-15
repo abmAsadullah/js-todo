@@ -61,10 +61,13 @@ ul {
   padding: 0;
 }
 
+
 .item {
   display: flex;
   justify-content: space-between;
   padding: 2px 20px;
+  border-bottom: 1px solid #f6f6f6;
+  outline: none;
 }
 
 .dot-icon,
@@ -87,11 +90,8 @@ button {
   border: none;
 }
 
-label {
-  justify-self: flex-start;
-}
 
-input:checked + label {
+input:checked + textarea {
   color: #909090;
   text-decoration: line-through;
 }
@@ -114,4 +114,23 @@ hr {
   text-decoration: underline;
   cursor: pointer;
   color: rgb(36, 36, 36);
+}
+
+.item textarea {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  resize: none;
+  height: 50px;
+  line-height: 45px;
+  overflow: hidden;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.check-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
