@@ -37,7 +37,6 @@ function viewList() {
                   <input id="input-${lst[j].index}" type="checkbox"/><textarea name="description"">${lst[j].description}</textarea></div>
                   <button draggable="true"><i class="fas fa-ellipsis-v dot-icon"></i></button>`;
         selectList.appendChild(toDoLi);
-        // selectList.appendChild(document.createElement('hr'));
       }
     }
   }
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', viewList);
 
 function loadLiEvents() {
   const liElements = document.querySelectorAll(".item");
-  // console.log(liElements);
   for (let i = 0; i < liElements.length; i++) {
     const drag = new Drag();
     liElements[i].addEventListener("dragstart", drag.dragStart);
