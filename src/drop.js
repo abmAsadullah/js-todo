@@ -70,7 +70,7 @@ export default class Drag {
             const dragBtn = document.createElement('button');
             dragBtn.draggable = 'true';
             const dotIcon = document.createElement('dot');
-            dotIcon.className = "fas fa-ellipsis-v dot-icon";
+            dotIcon.className = 'fas fa-ellipsis-v dot-icon';
             dragBtn.appendChild(dotIcon);
             toDoLi.appendChild(dragBtn);
           } else {
@@ -88,7 +88,7 @@ export default class Drag {
             const dragBtn = document.createElement('button');
             dragBtn.draggable = 'true';
             const dotIcon = document.createElement('dot');
-            dotIcon.className = "fas fa-ellipsis-v dot-icon";
+            dotIcon.className = 'fas fa-ellipsis-v dot-icon';
             dragBtn.appendChild(dotIcon);
             toDoLi.appendChild(dragBtn);
           }
