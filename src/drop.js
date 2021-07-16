@@ -7,7 +7,7 @@ export default class Drag {
   dragStart(event) {
     const target = Drag.getLI(event.target);
     dragging = target;
-    event.dataTransfer.setDragImage(dragging, 0, 0);
+    this.dataTransfer.setDragImage(dragging, 0, 0);
   }
 
   dragOver(event) {
@@ -15,14 +15,14 @@ export default class Drag {
     const target = Drag.getLI(event.target);
     dragging.style.display = 'none';
     const bounding = target.getBoundingClientRect();
-    const offset = bounding.y + 46 - event.clientY;
+    const offset = bounding.y + 46 - this.clientY;
     if (offset <= bounding.height / 2) {
       targing = target.nextSibling;
     } else {
       targing = target;
     }
   }
-
+  /* eslint-disable */
   drop(event) {
     event.preventDefault();
     const target = Drag.getLI(event.target);
@@ -32,6 +32,7 @@ export default class Drag {
     Status.saveChanges();
   }
 
+  /* eslint-enable */
   static getLI(target) {
     while (
       target.nodeName.toLowerCase() !== 'li'
