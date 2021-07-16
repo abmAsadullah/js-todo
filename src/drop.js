@@ -1,64 +1,98 @@
-var dragging = null;
-var targing = null;
+import Status from './status.js';
 
-export class Drag {
+let dragging = null;
+let targing = null;
+
+export default class Drag {
   dragStart(event) {
-    var target = Drag.getLI(event.target);
+    const target = Drag.getLI(event.target);
     dragging = target;
-    console.log("Start " + dragging.className);
-    event.dataTransfer.setData("text/plain", null);
     event.dataTransfer.setDragImage(dragging, 0, 0);
   }
 
   dragOver(event) {
     event.preventDefault();
-    var target = Drag.getLI(event.target);
-    console.log("Over " + target.className);
-    dragging.style.display = "none";
-    var bounding = target.getBoundingClientRect();
-    var offset = bounding.y + 46 - event.clientY;
+    const target = Drag.getLI(event.target);
+    dragging.style.display = 'none';
+    const bounding = target.getBoundingClientRect();
+    const offset = bounding.y + 46 - event.clientY;
     if (offset <= bounding.height / 2) {
       targing = target.nextSibling;
     } else {
       targing = target;
     }
-    console.log(targing);
   }
 
   drop(event) {
     event.preventDefault();
-    var target = Drag.getLI(event.target);
-    dragging.style.display = "flex";
-    console.log("Drop " + target.className);
+    const target = Drag.getLI(event.target);
+    dragging.style.display = 'flex';
     target.parentNode.insertBefore(dragging, targing);
+    // Local Storage change saved
+    Status.saveChanges();
   }
 
   static getLI(target) {
     while (
-      target.nodeName.toLowerCase() != "li" &&
-      target.nodeName.toLowerCase() != "body"
+      target.nodeName.toLowerCase() !== 'li'
+      && target.nodeName.toLowerCase() !== 'body'
     ) {
       target = target.parentNode;
     }
-    if (target.nodeName.toLowerCase() == "body") {
+    if (target.nodeName.toLowerCase() === 'body') {
       return false;
-    } else {
-      return target;
     }
+    return target;
   }
 
-  static viewList(lst) {
-    const selectList = document.getElementById("listed");
+  static sortList(lst) {
+    const listUl = document.getElementById('listed');
     for (let i = 1; i <= lst.length; i += 1) {
       for (let j = 0; j < lst.length; j += 1) {
         if (lst[j].index === i) {
-          const toDoLi = document.createElement("li");
+          const toDoLi = document.createElement('li');
           toDoLi.className = `item ${lst[j].index}`;
-          toDoLi.innerHTML = `
-                  <div class="check-div">
-                  <input id="input-${lst[j].index}" type="checkbox"/><textarea name="description"">${lst[j].description}</textarea></div>
-                  <button draggable="true"><i class="fas fa-ellipsis-v dot-icon"></i></button>`;
-          selectList.appendChild(toDoLi);
+          if (lst[j].completed) {
+            const checkDiv = document.createElement('div');
+            checkDiv.className = 'check-div';
+            toDoLi.appendChild(checkDiv);
+            const checks = document.createElement('input');
+            checks.className = 'checks';
+            checks.type = 'checkbox';
+            checks.checked = 'true';
+            checkDiv.appendChild(checks);
+            const descTextArea = document.createElement('textarea');
+            descTextArea.name = 'description';
+            descTextArea.innerText = lst[j].description;
+            descTextArea.style['text-decoration'] = 'line-through';
+            descTextArea.style.color = '#909090';
+            checkDiv.appendChild(descTextArea);
+            const dragBtn = document.createElement('button');
+            dragBtn.draggable = 'true';
+            const dotIcon = document.createElement('dot');
+            dotIcon.className = "fas fa-ellipsis-v dot-icon";
+            dragBtn.appendChild(dotIcon);
+            toDoLi.appendChild(dragBtn);
+          } else {
+            const checkDiv = document.createElement('div');
+            checkDiv.className = 'check-div';
+            toDoLi.appendChild(checkDiv);
+            const checks = document.createElement('input');
+            checks.className = 'checks';
+            checks.type = 'checkbox';
+            checkDiv.appendChild(checks);
+            const descTextArea = document.createElement('textarea');
+            descTextArea.name = 'description';
+            descTextArea.innerText = lst[j].description;
+            checkDiv.appendChild(descTextArea);
+            const dragBtn = document.createElement('button');
+            dragBtn.draggable = 'true';
+            const dotIcon = document.createElement('dot');
+            dotIcon.className = "fas fa-ellipsis-v dot-icon";
+            dragBtn.appendChild(dotIcon);
+            toDoLi.appendChild(dragBtn);
+          }
+          listUl.appendChild(toDoLi);
         }
       }
     }

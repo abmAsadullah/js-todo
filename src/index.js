@@ -1,12 +1,12 @@
-import { Drag } from "./drop.js";
-import { Status } from "./status.js";
-import './style.css';
+import Drag from "./drop.js";
+import Status from "./status.js";
+import "./style.css";
 
 const lst = [
   {
     index: 1,
     description: 'Complete tast',
-    completed: true,
+    completed: false,
   },
   {
     index: 2,
@@ -16,7 +16,7 @@ const lst = [
   {
     index: 3,
     description: 'Lodry',
-    completed: true,
+    completed: false,
   },
   {
     index: 4,
@@ -24,8 +24,6 @@ const lst = [
     completed: false,
   },
 ];
-
-document.addEventListener("DOMContentLoaded", Drag.viewList(lst));
 
 function loadLiEvents() {
   const liElements = document.querySelectorAll(".item");
@@ -39,10 +37,6 @@ function loadLiEvents() {
 
 document.addEventListener("DOMContentLoaded", loadLiEvents);
 
-function call() {
-  console.log("Heyyy");
-}
-
 function loadCheckboxes() {
   const checkboxes = document.querySelectorAll(".checks");
   for (let i = 0; i < checkboxes.length; i++) {
@@ -52,3 +46,14 @@ function loadCheckboxes() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCheckboxes);
+
+// Make Local Storage
+
+if (!localStorage.ToDoList) {
+  document.addEventListener("DOMContentLoaded", Drag.sortList(lst));
+} else {
+  document.addEventListener(
+    "DOMContentLoaded",
+    Drag.sortList(JSON.parse(localStorage.getItem("ToDoList")))
+  );
+}
