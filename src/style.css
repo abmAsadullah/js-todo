@@ -1,7 +1,7 @@
 main {
   font-family: sans-serif;
   color: rgb(49, 47, 47);
-  margin: 200px auto 0 auto;
+  margin: 100px auto 0 auto;
   padding: 0;
   width: 500px;
   background-color: #fff;
@@ -14,7 +14,7 @@ main {
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 
 h1 {
@@ -65,6 +65,8 @@ ul {
   display: flex;
   justify-content: space-between;
   padding: 2px 20px;
+  border-bottom: 1px solid #f6f6f6;
+  outline: none;
 }
 
 .dot-icon,
@@ -87,11 +89,20 @@ button {
   border: none;
 }
 
-label {
-  justify-self: flex-start;
+.item textarea {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  resize: none;
+  height: 50px;
+  line-height: 45px;
+  overflow: hidden;
+  width: 100%;
+  border: none;
+  outline: none;
 }
 
-input:checked + label {
+input:checked + textarea {
   color: #909090;
   text-decoration: line-through;
 }
@@ -114,4 +125,10 @@ hr {
   text-decoration: underline;
   cursor: pointer;
   color: rgb(36, 36, 36);
+}
+
+.check-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
